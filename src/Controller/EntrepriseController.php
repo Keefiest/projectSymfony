@@ -16,9 +16,24 @@ class EntrepriseController extends AbstractController
     public function index(ManagerRegistry $doctrine): Response
     {
         // récupérer toutes les entreprises de la BDD
-        $entreprises = $doctrine->getRepository(Entreprise::class)->findAll();
+        $entreprises = $doctrine->getRepository(Entreprise::class)->findBy([], ["raisonSociale" => "ASC"]);
         return $this->render('entreprise/index.html.twig', [
             "entreprises" => $entreprises
         ]);
     }
+    /**
+     * @Route("/entreprise/{id}", name="show_entreprise")
+     */
+    public function show(): Response
+    {
+        $entreprise = "";
+        return $this->render('entreprise/index.html.twig', [
+            "entreprises" => $entreprise
+        ]); 
+        
+    }
+    
+
+        
+    
 }

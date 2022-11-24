@@ -15,9 +15,21 @@ class EmployeController extends AbstractController
      */
     public function index(ManagerRegistry $doctrine): Response
     {
-        $employes = $doctrine->getRepository(Employe::class)->findAll();
+        // SELECT * FROM eploye WHERE ville = "strasbourg" ORDER BY nom ASC
+        $employes = $doctrine->getRepository(Employe::class)->findBy(["ville" => "STRASBOURG"], ["nom" => "ASC"]);
         return $this->render('employe/index.html.twig', [
             "employes" => $employes
         ]);
     }
-}
+     /**
+     * @Route("/employe/{id}", name="show_employe")
+     */
+    public function show(Employe $employe): Response
+    {
+        return $this->render('employe/show.html.twig', [
+            "employe" => $employe
+        ]);
+        
+    }
+    
+}   

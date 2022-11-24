@@ -125,6 +125,6 @@ class Employe
         return $this;
     }
     public function __toString(){
-        return $this->prenom." ". $this->nom." employé par ".$this->entreprise;
+        return $this->prenom." ". $this->nom;
     }
 }
