@@ -42,6 +42,12 @@ class Employe
      */
     private $ville;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Entreprise::class, inversedBy="employes")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $entreprise;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -105,5 +111,20 @@ class Employe
         $this->ville = $ville;
 
         return $this;
+    }
+
+    public function getEntreprise(): ?Entreprise
+    {
+        return $this->entreprise;
+    }
+
+    public function setEntreprise(?Entreprise $entreprise): self
+    {
+        $this->entreprise = $entreprise;
+
+        return $this;
+    }
+    public function __toString(){
+        return $this->prenom." ". $this->nom." employé par ".$this->entreprise;
     }
 }
