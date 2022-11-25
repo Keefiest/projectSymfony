@@ -26,9 +26,14 @@ class EmployeController extends AbstractController
 
     /**
      * @Route("/employe/add", name="add_employe")
+     * @Route("/employe/{id}/edit", name="edit_employe")
      */
     public function add(ManagerRegistry $doctrine, Employe $employe = null, Request $request): Response
     {
+        if(!$employe){
+            $employe = new Employe();
+        }
+
         $form = $this->createForm(EmployeType::class, $employe);
         $form->handleRequest($request);
 
@@ -47,9 +52,20 @@ class EmployeController extends AbstractController
 
         // vue pour afficher le formulaire d'ajout
         return $this->render('employe/add.html.twig', [
-            'formAddEmploye' => $form->createView()
+            'formAddEmploye' => $form->createView(),
+            'edit' => $employe->getId()
         ]);
 
+    }
+    /**
+     * @Route("/employe/{id}/delete", name="delete_employe")
+     */
+    public function delete(ManagerRegistry $doctrine, Employe $employe){
+
+        $entityManager = $doctrine->getManager();
+        $entityManager->remove($employe);
+        $entityManager->flush();
+        return $this->redirectToRoute('app_employe');
     }
 
      /**

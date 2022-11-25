@@ -4,3 +4,29 @@ body {
 h1 {
     color: red;
 }
+.forms{
+    width: 30%;
+}
+.nomPrenom{
+    display: flex;
+    gap: 20px;
+}
+.nomPrenom div{
+    width: 100%;
+}
+.dates{
+    display: flex;
+    width: 100%;
+    gap: 20px;
+
+}
+.dates div{
+    width: 100%;
+}
+.villeEntreprise{
+    display: flex;
+    gap: 20px;
+}
+.villeEntreprise div{
+    width: 100%;
+}
